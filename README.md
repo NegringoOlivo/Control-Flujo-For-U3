@@ -1,7 +1,7 @@
 # 🔁 Práctica de Control de Flujo: Bucle `for`
 
-**Tema:** Estructuras Iterativas Exactas (`for`).
-**Contexto:** Ejercicios progresivos basados en aplicaciones reales.
+**Tema:** Estructuras Iterativa (`for`).
+**Contexto:** Ejercicios progresivos basados en (retos) aplicaciones reales.
 
 ---
 
