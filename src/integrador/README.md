@@ -120,3 +120,45 @@ Declara la siguiente función estática:
 Escaneo completado. Total de equipos revisados: 6.
 ¡ALERTA! Se encontraron 3 servidores en estado CRÍTICO.
 Se recomienda activar refrigeración líquida inmediatamente.
+```
+## 💻 Reto Experto: Escáner Térmico de Data Center
+
+**Contexto:** Infraestructura en la Nube y Hardware de Servidores.
+
+Para evitar pérdida de datos, las empresas tecnológicas monitorean la temperatura de sus granjas de servidores. Estos equipos están organizados físicamente en una estructura de cuadrícula: armarios completos llamados **Racks**, donde cada Rack contiene múltiples **Servidores** apilados.
+
+### 📝 Descripción del Problema
+
+Desarrolla una herramienta de diagnóstico por terminal que permita escanear la temperatura de todos los equipos en el centro de datos y emitir alertas de seguridad.
+
+**Requerimientos del Sistema:**
+
+1. El programa debe solicitar dinámicamente las dimensiones físicas de la granja: cuántos Racks se van a analizar y cuántos Servidores contiene cada Rack.
+2. El sistema debe recorrer cada servidor de manera ordenada (Rack por Rack, Servidor por Servidor), solicitando al usuario ingresar la lectura de temperatura exacta para esa posición específica.
+3. **Regla de Negocio:** Cualquier lectura igual o superior a `75.0` grados centígrados se considera `"[ CRÍTICO ]"`. Las lecturas inferiores son consideradas `"[ OK ]"`.
+4. **Restricción de Arquitectura:** La lógica matemática que evalúa la temperatura y determina la etiqueta de estado (`"[ CRÍTICO ]"` o `"[ OK ]"`) **no debe programarse directamente en el flujo principal del sistema**. Debes diseñar un submódulo o rutina independiente que reciba el valor de la temperatura, lo procese y le devuelva el texto de diagnóstico al programa principal para que este lo imprima.
+5. El sistema debe llevar un conteo en memoria de cuántos equipos sobrecalentados se van detectando durante el escaneo.
+6. Al finalizar el recorrido total, se debe imprimir un reporte que resuma la cantidad de equipos totales escaneados y el número de alertas críticas detectadas.
+
+### 📤 Salida Esperada
+
+* **Ejemplo de Ejecución:**
+
+```text
+--- INICIANDO ESCÁNER TÉRMICO ---
+¿Cuántos Racks vas a analizar?: 2
+¿Cuántos Servidores hay por Rack?: 3
+
+>> Escaneando Rack 1:
+   Temp. Servidor 1: 45.5  -> Estado: [   OK   ]
+   Temp. Servidor 2: 78.2  -> Estado: [ CRÍTICO ]
+   Temp. Servidor 3: 60.0  -> Estado: [   OK   ]
+
+>> Escaneando Rack 2:
+   Temp. Servidor 1: 82.1  -> Estado: [ CRÍTICO ]
+   Temp. Servidor 2: 74.9  -> Estado: [   OK   ]
+   Temp. Servidor 3: 90.5  -> Estado: [ CRÍTICO ]
+
+--- REPORTE FINAL ---
+Escaneo completado. Total de equipos revisados: 6.
+¡ALERTA! Se encontraron 3 servidores en estado CRÍTICO.
