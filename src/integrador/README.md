@@ -63,3 +63,60 @@ Temperatura Servidor 3: 92.5
 ...
 Elige una opción: 3
 >> Cerrando conexión con el servidor.
+```
+
+# 💻 Reto Experto: Escáner Térmico de Data Center
+
+**Temas a practicar:** Funciones (métodos con retorno), Bucles `for` anidados y Condicionales dobles (`if-else`).
+**Contexto:** Infraestructura en la Nube y Hardware de Servidores.
+
+Para evitar incendios o pérdida de datos, las empresas tecnológicas (como Google o Amazon) monitorean la temperatura de sus granjas de servidores. Estos servidores están organizados físicamente en **Racks** (armarios/filas) y cada Rack contiene múltiples **Servidores** (espacios/columnas).
+
+### 📝 Descripción del Problema
+
+Desarrolla un programa en Java que actúe como una herramienta de diagnóstico por terminal. El programa principal (`main`) pedirá las dimensiones del clúster y usará ciclos anidados para escanear cada equipo, pero delegará la evaluación del estado a una **función personalizada**.
+
+### 🛠️ Función a Desarrollar (Fuera del `main`)
+
+Declara la siguiente función estática:
+* **`String evaluarEstado(double temperatura)`**: Esta función recibe los grados centígrados de un servidor. 
+  * Adentro, utiliza una estructura **`if-else` doble**. 
+  * Si la temperatura es mayor o igual a `75.0`, la función debe retornar el texto `"[ CRÍTICO ]"`. 
+  * De lo contrario (si es menor), debe retornar el texto `"[   OK   ]"`.
+
+### 📋 Flujo del Programa Principal (`main`)
+
+1. Solicita al usuario ingresar dos números enteros: la cantidad de **Racks** a analizar y la cantidad de **Servidores por Rack**.
+2. Declara una variable contadora (ej. `int servidoresEnPeligro = 0;`) para llevar el registro de los equipos sobrecalentados.
+3. Utiliza un **ciclo `for` externo** que represente los Racks.
+4. Adentro de ese ciclo, coloca un **ciclo `for` interno** que represente los Servidores.
+5. En cada iteración del ciclo interno:
+   * Pide al usuario que ingrese la temperatura exacta del Servidor actual.
+   * **Invoca a tu función** `evaluarEstado(temperatura)` y guarda el texto que te retorna en una variable `String`.
+   * Imprime en esa misma línea el estado del servidor.
+   * Si el texto retornado es igual a `"[ CRÍTICO ]"`, suma 1 a tu contador de peligro.
+6. Al finalizar los ciclos anidados, imprime el resumen del escaneo.
+
+### 📤 Salida Esperada (Ejemplo de Ejecución)
+
+* **Ejemplo Entrada (`Racks: 2, Servidores por Rack: 3`):**
+
+```text
+--- INICIANDO ESCÁNER TÉRMICO ---
+¿Cuántos Racks vas a analizar?: 2
+¿Cuántos Servidores hay por Rack?: 3
+
+>> Escaneando Rack 1:
+   Temp. Servidor 1: 45.5  -> Estado: [   OK   ]
+   Temp. Servidor 2: 78.2  -> Estado: [ CRÍTICO ]
+   Temp. Servidor 3: 60.0  -> Estado: [   OK   ]
+
+>> Escaneando Rack 2:
+   Temp. Servidor 1: 82.1  -> Estado: [ CRÍTICO ]
+   Temp. Servidor 2: 74.9  -> Estado: [   OK   ]
+   Temp. Servidor 3: 90.5  -> Estado: [ CRÍTICO ]
+
+--- REPORTE FINAL ---
+Escaneo completado. Total de equipos revisados: 6.
+¡ALERTA! Se encontraron 3 servidores en estado CRÍTICO.
+Se recomienda activar refrigeración líquida inmediatamente.
